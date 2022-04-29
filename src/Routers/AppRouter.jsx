@@ -13,13 +13,14 @@ export const AppRouter = () => {
       <div>
         <Switch>
           <Route
+            path="/auth"
             children={
               <PublicRoutes isLoged={true}>
                 <AuthRouter />
               </PublicRoutes>
             }
           />
-          <Redirect to="/login" />
+          <Redirect to="/" />
         </Switch>
       </div>
     </Router>
