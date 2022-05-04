@@ -4,7 +4,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { CalendarScreen } from "../Components";
 import { AuthRouter } from "./AuthRouter";
+import { PrivateRoutes } from "./PrivateRoutes";
 import { PublicRoutes } from "./PublicRoutes";
 
 export const AppRouter = () => {
@@ -15,12 +17,20 @@ export const AppRouter = () => {
           <Route
             path="/auth"
             children={
-              <PublicRoutes isLoged={true}>
+              <PublicRoutes isLogIn={false}>
                 <AuthRouter />
               </PublicRoutes>
             }
           />
-          <Redirect to="/" />
+          <Route
+            path="/"
+            children={
+              <PrivateRoutes isLogIn={false}>
+                <CalendarScreen />
+              </PrivateRoutes>
+            }
+          />
+          <Redirect to="/auth/login" />
         </Switch>
       </div>
     </Router>

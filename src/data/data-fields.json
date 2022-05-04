@@ -1,0 +1,98 @@
+[
+  {
+    "field": "input",
+    "type": "text",
+    "id": "name",
+    "name": "name",
+    "label": "Name",
+    "fieldShouldShow": {
+      "register": true
+    },
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field First name is requiered"
+      },
+      {
+        "type": "minLength",
+        "min": 3,
+        "description": "Must be 3 characteres minimum"
+      }
+    ]
+  },
+  {
+    "field": "input",
+    "type": "email",
+    "isText": true,
+    "id": "email",
+    "name": "email",
+    "label": "Email",
+    "value": "",
+    "fieldShouldShow": {
+      "logIn": true,
+      "register": true
+    },
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field email is requiered"
+      },
+      {
+        "type": "email",
+        "description": "the email must be a valid email"
+      }
+    ]
+  },
+  {
+    "field": "input",
+    "type": "password",
+    "isText": false,
+    "id": "password",
+    "name": "password",
+    "label": "Password",
+    "value": "",
+    "fieldShouldShow": {
+      "logIn": true,
+      "register": true
+    },
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field password is requiered"
+      },
+      {
+        "type": "minLength",
+        "min": 6,
+        "description": "Must be 6 characteres minimum"
+      },
+      {
+        "type": "maxLength",
+        "max": 6,
+        "description": "Must be 6 characteres maximun"
+      }
+    ]
+  },
+  {
+    "field": "input",
+    "type": "password",
+    "isText": false,
+    "id": "confirmPassword",
+    "name": "confirmPassword",
+    "label": "Comfirm password",
+    "value": "",
+    "fieldShouldShow": {
+      "register": true
+    },
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field comfirm password is requiered"
+      },
+      {
+        "type": "sameField",
+        "description": "The password must be the same"
+      }
+    ]
+  }
+]
