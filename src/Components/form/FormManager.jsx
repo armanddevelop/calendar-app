@@ -22,7 +22,7 @@ export const FormManager = ({ pageName, title }) => {
           initialValues={fieldsPage}
         >
           {({ errors }) => (
-            <Form noValidate>
+            <Form noValidate className="form__manager__fields">
               {dataFields.map(
                 ({
                   fieldShouldShow,
