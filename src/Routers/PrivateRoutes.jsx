@@ -1,5 +1,9 @@
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+export const PrivateRoutes = ({ children, isLoged }) =>
+  isLoged ? children : <Redirect to="/authorice/login" />;
 
-export const PrivateRoutes = ({ children, logIn }) => {
-  return logIn ? children : <Redirect to="/auth/register" />;
+PrivateRoutes.propType = {
+  isLoged: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
 };

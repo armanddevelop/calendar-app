@@ -15,22 +15,22 @@ export const AppRouter = () => {
       <div>
         <Switch>
           <Route
-            path="/"
+            path="/authorice"
             children={
-              <PublicRoutes isLogIn={false}>
+              <PublicRoutes isLoged={true}>
                 <AuthRouter />
               </PublicRoutes>
             }
           />
-          {/* <Route
-            path="/auth/calendar"
+          <Route
+            path="/"
             children={
-              <PrivateRoutes isLogIn={true}>
+              <PrivateRoutes isLoged={true}>
                 <CalendarScreen />
               </PrivateRoutes>
             }
-          /> */}
-          <Redirect to="/auth/login" />
+          ></Route>
+          <Redirect to="/authorice/login" />
         </Switch>
       </div>
     </Router>

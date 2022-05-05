@@ -1,15 +1,21 @@
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 export const LinkManager = ({ pageName }) => {
-  const registerPath = "/auth/register";
-  const logInPath = "/auth/login";
+  const registerPath = "/authorice/register";
+  const logInPath = "/authorice/login";
 
   return (
     <>
-      <a
+      <Link
         className="form__manager__link"
-        href={pageName === "logIn" ? registerPath : logInPath}
+        to={pageName === "logIn" ? registerPath : logInPath}
       >
         {pageName === "logIn" ? "Register" : "LogIn"}
-      </a>
+      </Link>
     </>
   );
+};
+
+LinkManager.propType = {
+  pageName: PropTypes.string.isRequired,
 };

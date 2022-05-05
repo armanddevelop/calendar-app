@@ -1,17 +1,15 @@
 import { Switch, Route, Redirect } from "react-router-dom";
-import { LogInScreen, RegisterScreen, CalendarScreen } from "../Components";
+import { LogInScreen, RegisterScreen } from "../Components";
 
 export const AuthRouter = () => {
-  const registerPath = "/auth/register";
-  const logInPath = "/auth/login";
-  const calendarPath = "/auth/calendar";
+  const registerPath = "/authorice/register";
+  const logInPath = "/authorice/login";
   return (
     <div>
       <Switch>
         <Route exact path={logInPath} component={LogInScreen} />
         <Route exact path={registerPath} component={RegisterScreen} />
-        <Route exact path={calendarPath} component={CalendarScreen} />
-        <Redirect to="/auth/login" />
+        <Redirect to="/authorice/login" />
       </Switch>
     </div>
   );
