@@ -6,6 +6,8 @@ import dataFields from "../../data/data-fields.json";
 import { buildFields } from "../../utils/buildFields";
 import { TextInputs } from "../Fields/TextInputs";
 import { LinkManager } from "../Link/LinkManager";
+import { DatePickerComponent } from "../Fields/DatePickerComponent";
+import { TextArea } from "../Fields/TextArea";
 
 export const FormManager = ({ pageName, title }) => {
   const fieldsPage = buildFields(pageName).initialFields;
@@ -32,26 +34,52 @@ export const FormManager = ({ pageName, title }) => {
                   type,
                   label,
                   validations,
-                }) =>
-                  fieldShouldShow[pageName] ? (
-                    <TextInputs
-                      key={id}
-                      name={name}
-                      value={value}
-                      type={type}
-                      label={label}
-                      validations={validations}
-                      errors={errors}
-                    />
-                  ) : null
+                  field,
+                }) => {
+                  if (fieldShouldShow?.[pageName]) {
+                    if (pageName !== "modal") {
+                      return (
+                        <TextInputs
+                          key={id}
+                          name={name}
+                          value={value}
+                          type={type}
+                          label={label}
+                          validations={validations}
+                          errors={errors}
+                        />
+                      );
+                    }
+                    if (field === "input") {
+                      return (
+                        <TextInputs
+                          key={id}
+                          name={name}
+                          value={value}
+                          type={type}
+                          label={label}
+                          validations={validations}
+                          errors={errors}
+                        />
+                      );
+                    }
+                    if (field === "date") {
+                      return <DatePickerComponent key={id} />;
+                    }
+                    if (field === "textarea") {
+                      return <TextArea key={id} />;
+                    }
+                  }
+                  return null;
+                }
               )}
               <Button variant="contained" type="submit">
-                {pageName}
+                {pageName !== "modal" ? pageName : "Save Event"}
               </Button>
             </Form>
           )}
         </Formik>
-        <LinkManager pageName={pageName} />
+        {pageName !== "modal" && <LinkManager pageName={pageName} />}
       </div>
     </>
   );

@@ -94,5 +94,93 @@
         "description": "The password must be the same"
       }
     ]
+  },
+  {
+    "field": "date",
+    "type": "datePicker",
+    "isText": false,
+    "id": "dateStart",
+    "name": "dateStart",
+    "label": "Start Date Event",
+    "value": "",
+    "fieldShouldShow": {
+      "modal": true
+    },
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field comfirm password is requiered"
+      },
+      {
+        "type": "sameField",
+        "description": "The password must be the same"
+      }
+    ]
+  },
+  {
+    "field": "date",
+    "type": "datePicker",
+    "isText": false,
+    "id": "dateEnd",
+    "name": "dateEnd",
+    "label": "End Date Event",
+    "value": "",
+    "fieldShouldShow": {
+      "modal": true
+    },
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field comfirm password is requiered"
+      },
+      {
+        "type": "sameField",
+        "description": "The password must be the same"
+      }
+    ]
+  },
+  {
+    "field": "input",
+    "type": "text",
+    "id": "title",
+    "name": "title",
+    "label": "Title event",
+    "fieldShouldShow": {
+      "modal": true
+    },
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field First name is requiered"
+      },
+      {
+        "type": "minLength",
+        "min": 3,
+        "description": "Must be 3 characteres minimum"
+      }
+    ]
+  },
+  {
+    "field": "textarea",
+    "type": "textarea",
+    "id": "notes",
+    "name": "notes",
+    "label": "Put some notes about the event",
+    "fieldShouldShow": {
+      "modal": true
+    },
+    "value": "",
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field First name is requiered"
+      },
+      {
+        "type": "minLength",
+        "min": 3,
+        "description": "Must be 3 characteres minimum"
+      }
+    ]
   }
 ]
