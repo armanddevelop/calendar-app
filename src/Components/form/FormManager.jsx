@@ -11,9 +11,11 @@ import { TextArea } from "../Fields/TextArea";
 
 export const FormManager = ({ pageName, title }) => {
   const fieldsPage = buildFields(pageName).initialFields;
+
   const validationSchema = Yup.object({
     ...buildFields(pageName).validationsFields,
   });
+
   return (
     <>
       <h1 className="form__manager__title">{title}</h1>
@@ -64,10 +66,24 @@ export const FormManager = ({ pageName, title }) => {
                       );
                     }
                     if (field === "date") {
-                      return <DatePickerComponent key={id} />;
+                      return (
+                        <DatePickerComponent
+                          key={id}
+                          name={name}
+                          label={label}
+                          value={value}
+                        />
+                      );
                     }
                     if (field === "textarea") {
-                      return <TextArea key={id} />;
+                      return (
+                        <TextArea
+                          key={id}
+                          name={name}
+                          value={value}
+                          label={label}
+                        />
+                      );
                     }
                   }
                   return null;

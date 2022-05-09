@@ -106,16 +106,7 @@
     "fieldShouldShow": {
       "modal": true
     },
-    "validations": [
-      {
-        "type": "required",
-        "description": "The field comfirm password is requiered"
-      },
-      {
-        "type": "sameField",
-        "description": "The password must be the same"
-      }
-    ]
+    "validations": []
   },
   {
     "field": "date",
@@ -128,16 +119,7 @@
     "fieldShouldShow": {
       "modal": true
     },
-    "validations": [
-      {
-        "type": "required",
-        "description": "The field comfirm password is requiered"
-      },
-      {
-        "type": "sameField",
-        "description": "The password must be the same"
-      }
-    ]
+    "validations": []
   },
   {
     "field": "input",
@@ -149,17 +131,7 @@
       "modal": true
     },
     "value": "",
-    "validations": [
-      {
-        "type": "required",
-        "description": "The field First name is requiered"
-      },
-      {
-        "type": "minLength",
-        "min": 3,
-        "description": "Must be 3 characteres minimum"
-      }
-    ]
+    "validations": []
   },
   {
     "field": "textarea",
@@ -171,16 +143,6 @@
       "modal": true
     },
     "value": "",
-    "validations": [
-      {
-        "type": "required",
-        "description": "The field First name is requiered"
-      },
-      {
-        "type": "minLength",
-        "min": 3,
-        "description": "Must be 3 characteres minimum"
-      }
-    ]
+    "validations": []
   }
 ]

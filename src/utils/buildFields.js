@@ -1,8 +1,9 @@
 import * as Yup from "yup";
+import moment from "moment";
 import dataFields from "../data/data-fields.json";
 const initialFields = {};
 const validationsFields = {};
-const typesDicctionary = {
+const typesDicctionaryValidations = {
   required: "required",
   minLength: "minLength",
   sameField: "sameField",
@@ -11,10 +12,16 @@ const typesDicctionary = {
 export const buildFields = (pageName) => {
   for (const data of dataFields) {
     let stringYup = Yup.string();
-    const { name, value, fieldShouldShow, validations } = data;
-    const { required, minLength, maxLength, sameField } = typesDicctionary;
+    const { name, value, fieldShouldShow, validations, field } = data;
+    const { required, minLength, maxLength, sameField } =
+      typesDicctionaryValidations;
     if (fieldShouldShow[pageName]) {
-      initialFields[name] = value;
+      if (field === "date") {
+        initialFields[name] = moment(new Date());
+      }
+      if (field !== "date") {
+        initialFields[name] = value;
+      }
       if (validations.length > 0) {
         for (const rule of validations) {
           if (rule.type === required) {
