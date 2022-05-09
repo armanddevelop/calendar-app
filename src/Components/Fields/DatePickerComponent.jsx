@@ -11,8 +11,10 @@ export const DatePickerComponent = (props) => {
   const { setValue } = helpers;
   const momentDate = moment(new Date());
   const getDataFromPicker = (newValue) => {
-    const dateValue = newValue.format();
-    setValue(dateValue);
+    if (newValue) {
+      const dateValue = newValue.format();
+      setValue(dateValue);
+    }
   };
   return (
     <div className="form__manager__datePicker">
