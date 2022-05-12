@@ -15,7 +15,6 @@ export const FormManager = ({ pageName, title }) => {
   const validationSchema = Yup.object({
     ...buildFields(pageName).validationsFields,
   });
-
   return (
     <>
       <h1 className="form__manager__title">{title}</h1>
@@ -72,6 +71,7 @@ export const FormManager = ({ pageName, title }) => {
                           name={name}
                           label={label}
                           value={value}
+                          errors={errors}
                         />
                       );
                     }

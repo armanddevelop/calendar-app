@@ -8,13 +8,16 @@ const typesDicctionaryValidations = {
   minLength: "minLength",
   sameField: "sameField",
   maxLength: "maxLength",
+  emailField: "email",
 };
-export const buildValidations = (validationsArr, nameField) => {
+const buildValidations = (validationsArr, nameField, field) => {
   let stringYup = Yup.string();
-  const { required, minLength, maxLength, sameField } =
+  let dateYupStart = Yup.date();
+  let dateYupEnd = Yup.date();
+  const { required, minLength, maxLength, sameField, emailField } =
     typesDicctionaryValidations;
   for (const rule of validationsArr) {
-    if (rule.type === required) {
+    if (rule.type === required && field !== "date") {
       stringYup = stringYup.required(rule.description);
     }
     if (rule.type === minLength) {
@@ -32,11 +35,30 @@ export const buildValidations = (validationsArr, nameField) => {
         }
       );
     }
-    if (rule.type === "email") {
+    if (rule.type === emailField) {
       stringYup = stringYup.email(rule.description);
     }
+    if (rule.type === required && field === "date") {
+      if ("dateStart" === nameField) {
+        dateYupStart = dateYupStart.required();
+        validationsFields[nameField] = dateYupStart;
+      }
+
+      if ("dateEnd" === nameField) {
+        dateYupEnd = dateYupEnd.when("dateStart", (startDate, schema) => {
+          return (
+            startDate &&
+            schema.min(
+              startDate,
+              `${rule.description} ${moment(startDate).format("LLL")}`
+            )
+          );
+        });
+        validationsFields[nameField] = dateYupEnd;
+      }
+    }
   }
-  validationsFields[nameField] = stringYup;
+  if (field !== "date") validationsFields[nameField] = stringYup;
 };
 export const buildFields = (pageName) => {
   for (const data of dataFields) {
@@ -50,7 +72,7 @@ export const buildFields = (pageName) => {
         initialFields[name] = value;
       }
       if (validations.length > 0) {
-        buildValidations(validations, name);
+        buildValidations(validations, name, field);
       }
     }
   }

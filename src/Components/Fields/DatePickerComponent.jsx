@@ -5,12 +5,16 @@ import { TextField } from "@mui/material";
 import { useField } from "formik";
 
 export const DatePickerComponent = (props) => {
-  const { name, label } = props;
+  const { name, label, errors } = props;
   const [field, , helpers] = useField(props);
+  let isError = false;
   const { value } = field;
   const { setValue } = helpers;
-  const momentDate = moment(new Date());
+  if (!(Object.keys(errors).length === 0 && errors.constructor === Object)) {
+    isError = Boolean(errors[name]);
+  }
   const getDataFromPicker = (newValue) => {
+    //console.log("esto vale new value ", newValue);
     if (newValue) {
       const dateValue = newValue.format();
       setValue(dateValue);
@@ -21,10 +25,12 @@ export const DatePickerComponent = (props) => {
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DateTimePicker
           renderInput={(params) => {
-            return <TextField {...params} />;
+            return (
+              <TextField helperText={isError ? errors[name] : ""} {...params} />
+            );
           }}
           name={name}
-          minDateTime={momentDate}
+          minDateTime={moment(value)}
           label={label}
           value={value}
           onChange={(value) => getDataFromPicker(value)}

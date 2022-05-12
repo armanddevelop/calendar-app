@@ -97,7 +97,7 @@
   },
   {
     "field": "date",
-    "type": "datePicker",
+    "type": "datePickerStart",
     "isText": false,
     "id": "dateStart",
     "name": "dateStart",
@@ -106,11 +106,16 @@
     "fieldShouldShow": {
       "modal": true
     },
-    "validations": []
+    "validations": [
+      {
+        "type": "required",
+        "description": "The field Start Date Event is requiered"
+      }
+    ]
   },
   {
     "field": "date",
-    "type": "datePicker",
+    "type": "datePickerEnd",
     "isText": false,
     "id": "dateEnd",
     "name": "dateEnd",
@@ -119,7 +124,12 @@
     "fieldShouldShow": {
       "modal": true
     },
-    "validations": []
+    "validations": [
+      {
+        "type": "required",
+        "description": "The end date event must be after"
+      }
+    ]
   },
   {
     "field": "input",

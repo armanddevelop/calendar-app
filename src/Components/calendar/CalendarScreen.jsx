@@ -9,7 +9,7 @@ import { useState } from "react";
 import { onViewChange } from "../../utils/calendarEvents";
 import { CalendarModal } from "./CalendarModal";
 
-moment.locale("es-mx");
+moment.locale("en-us");
 const localizer = momentLocalizer(moment);
 const myEventsList = [
   {
