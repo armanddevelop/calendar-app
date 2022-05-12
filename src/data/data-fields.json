@@ -127,7 +127,8 @@
     "validations": [
       {
         "type": "required",
-        "description": "The end date event must be after"
+        "mustBeAfterMessage": "The end date event must be after",
+        "gratherMessage": "End date must be grater than start date"
       }
     ]
   },

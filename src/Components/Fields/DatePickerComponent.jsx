@@ -14,7 +14,6 @@ export const DatePickerComponent = (props) => {
     isError = Boolean(errors[name]);
   }
   const getDataFromPicker = (newValue) => {
-    //console.log("esto vale new value ", newValue);
     if (newValue) {
       const dateValue = newValue.format();
       setValue(dateValue);

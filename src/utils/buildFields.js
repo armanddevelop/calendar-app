@@ -45,15 +45,21 @@ const buildValidations = (validationsArr, nameField, field) => {
       }
 
       if ("dateEnd" === nameField) {
-        dateYupEnd = dateYupEnd.when("dateStart", (startDate, schema) => {
-          return (
-            startDate &&
-            schema.min(
-              startDate,
-              `${rule.description} ${moment(startDate).format("LLL")}`
-            )
-          );
-        });
+        dateYupEnd = dateYupEnd
+          .when("dateStart", (startDate, schema) => {
+            return (
+              startDate &&
+              schema.min(
+                startDate,
+                `${rule.mustBeAfterMessage} ${moment(startDate).format("LLL")}`
+              )
+            );
+          })
+          .test("datesNotBeEquals", rule.gratherMessage, function (value) {
+            const dateStart = moment(this.parent.dateStart).format("LLL");
+            const dateEnd = moment(value).format("LLL");
+            return !moment(dateStart).isSame(moment(dateEnd), "minute");
+          });
         validationsFields[nameField] = dateYupEnd;
       }
     }
