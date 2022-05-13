@@ -142,7 +142,12 @@
       "modal": true
     },
     "value": "",
-    "validations": []
+    "validations": [
+      {
+        "type": "required",
+        "description": "The title of the event is requiered"
+      }
+    ]
   },
   {
     "field": "textarea",

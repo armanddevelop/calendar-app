@@ -9,7 +9,7 @@ import { LinkManager } from "../Link/LinkManager";
 import { DatePickerComponent } from "../Fields/DatePickerComponent";
 import { TextArea } from "../Fields/TextArea";
 
-export const FormManager = ({ pageName, title }) => {
+export const FormManager = ({ pageName, title, handleClose }) => {
   const fieldsPage = buildFields(pageName).initialFields;
 
   const validationSchema = Yup.object({
@@ -17,7 +17,7 @@ export const FormManager = ({ pageName, title }) => {
   });
   return (
     <>
-      <h1 className="form__manager__title">{title}</h1>
+      <h3 className="form__manager__title">{title}</h3>
       <div className="form__manager__content">
         <Formik
           validationSchema={validationSchema}

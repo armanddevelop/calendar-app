@@ -10,6 +10,13 @@ const typesDicctionaryValidations = {
   maxLength: "maxLength",
   emailField: "email",
 };
+
+function validDate(value) {
+  const dateStart = moment(this.parent.dateStart).format("LLL");
+  const dateEnd = moment(value).format("LLL");
+  return !moment(dateStart).isSame(moment(dateEnd), "minute");
+}
+
 const buildValidations = (validationsArr, nameField, field) => {
   let stringYup = Yup.string();
   let dateYupStart = Yup.date();
@@ -55,11 +62,7 @@ const buildValidations = (validationsArr, nameField, field) => {
               )
             );
           })
-          .test("datesNotBeEquals", rule.gratherMessage, function (value) {
-            const dateStart = moment(this.parent.dateStart).format("LLL");
-            const dateEnd = moment(value).format("LLL");
-            return !moment(dateStart).isSame(moment(dateEnd), "minute");
-          });
+          .test("datesNotBeEquals", rule.gratherMessage, validDate);
         validationsFields[nameField] = dateYupEnd;
       }
     }
@@ -72,7 +75,7 @@ export const buildFields = (pageName) => {
 
     if (fieldShouldShow[pageName]) {
       if (field === "date") {
-        initialFields[name] = moment(new Date());
+        initialFields[name] = moment().minutes(0).second(0).add(1, "hours");
       }
       if (field !== "date") {
         initialFields[name] = value;

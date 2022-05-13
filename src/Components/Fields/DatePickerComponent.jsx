@@ -13,8 +13,18 @@ export const DatePickerComponent = (props) => {
   if (!(Object.keys(errors).length === 0 && errors.constructor === Object)) {
     isError = Boolean(errors[name]);
   }
+  const textField = (params) => {
+    return (
+      <TextField
+        helperText={isError ? errors[name] : ""}
+        {...params}
+        error={isError}
+      />
+    );
+  };
   const getDataFromPicker = (newValue) => {
     if (newValue) {
+      //to Do maybe change this value
       const dateValue = newValue.format();
       setValue(dateValue);
     }
@@ -23,15 +33,11 @@ export const DatePickerComponent = (props) => {
     <div className="form__manager__datePicker">
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <DateTimePicker
-          renderInput={(params) => {
-            return (
-              <TextField helperText={isError ? errors[name] : ""} {...params} />
-            );
-          }}
+          renderInput={(params) => textField(params)}
           name={name}
-          minDateTime={moment(value)}
+          minDateTime={moment(new Date())}
           label={label}
-          value={value}
+          value={moment(value).toDate()}
           onChange={(value) => getDataFromPicker(value)}
         />
       </LocalizationProvider>
