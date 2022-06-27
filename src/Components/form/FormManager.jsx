@@ -21,7 +21,10 @@ export const FormManager = ({ pageName, title, handleClose }) => {
       <div className="form__manager__content">
         <Formik
           validationSchema={validationSchema}
-          onSubmit={(values) => console.log("This are the values", values)}
+          onSubmit={(values) => {
+            console.log("This are the values", values);
+            handleClose();
+          }}
           initialValues={fieldsPage}
         >
           {({ errors }) => (

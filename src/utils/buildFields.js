@@ -11,7 +11,7 @@ const typesDicctionaryValidations = {
   emailField: "email",
 };
 
-function validDate(value) {
+function notEqualDates(value) {
   const dateStart = moment(this.parent.dateStart).format("LLL");
   const dateEnd = moment(value).format("LLL");
   return !moment(dateStart).isSame(moment(dateEnd), "minute");
@@ -62,7 +62,7 @@ const buildValidations = (validationsArr, nameField, field) => {
               )
             );
           })
-          .test("datesNotBeEquals", rule.gratherMessage, validDate);
+          .test("datesNotBeEquals", rule.gratherMessage, notEqualDates);
         validationsFields[nameField] = dateYupEnd;
       }
     }
