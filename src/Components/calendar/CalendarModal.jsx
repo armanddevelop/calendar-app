@@ -1,5 +1,5 @@
 import { Box, Modal, Fade, Backdrop } from "@mui/material";
-import { useState } from "react";
+import { useUIStore } from "../../Hooks";
 import { FormManager } from "../form/FormManager";
 
 const style = {
@@ -15,14 +15,15 @@ const style = {
 };
 
 export const CalendarModal = () => {
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const { isDateModalOpen, closeDateModal } = useUIStore();
   const handleClose = () => {
-    setIsOpenModal(false);
+    closeDateModal();
   };
+
   return (
     <div>
       <Modal
-        open={isOpenModal}
+        open={isDateModalOpen}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -32,7 +33,7 @@ export const CalendarModal = () => {
           timeout: 1000,
         }}
       >
-        <Fade in={isOpenModal}>
+        <Fade in={isDateModalOpen}>
           <Box sx={style}>
             <div>
               <FormManager
