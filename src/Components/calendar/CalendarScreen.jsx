@@ -1,3 +1,4 @@
+import { useState } from "react";
 import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { messages } from "../../utils/calendarTrasnlationsES";
@@ -5,9 +6,9 @@ import { NavBar } from "../ui/NavBar";
 import { CalendarEvent } from "./CalendarEvent";
 import "moment/locale/es-mx";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useState } from "react";
 import { onViewChange } from "../../utils/calendarEvents";
 import { CalendarModal } from "./CalendarModal";
+import { FabAddNew } from "../FloatingActionButton/FabAddNew";
 import { useCalendarStore, useUIStore } from "../../Hooks";
 
 moment.locale("en-us");
@@ -16,15 +17,16 @@ const localizer = momentLocalizer(moment);
 export const CalendarScreen = () => {
   const [view, setView] = useState(localStorage.getItem("lastView") || "month");
   const { showModal } = useUIStore();
-  const { events } = useCalendarStore();
+  const { events, setActiveEvent } = useCalendarStore();
 
   const onDoubleClick = (e) => {
     console.log("esto vale onDoubleClick ", e);
     showModal(true);
   };
 
-  const onSelectEvent = (e) => {
-    console.log("esto vale e en onSelectEvent", e);
+  const onSelectEvent = (evt) => {
+    console.log("esto vale e en onSelectEvent", evt);
+    setActiveEvent(evt);
   };
 
   const eventStyleGetter = (...args) => {
@@ -58,6 +60,7 @@ export const CalendarScreen = () => {
           }}
         />
         <CalendarModal />
+        <FabAddNew />
       </div>
     </>
   );
