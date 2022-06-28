@@ -8,30 +8,19 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { useState } from "react";
 import { onViewChange } from "../../utils/calendarEvents";
 import { CalendarModal } from "./CalendarModal";
-import { useUIStore } from "../../Hooks";
+import { useCalendarStore, useUIStore } from "../../Hooks";
 
 moment.locale("en-us");
 const localizer = momentLocalizer(moment);
-const myEventsList = [
-  {
-    title: "Cumpleaños alicha",
-    start: moment().toDate(),
-    end: moment().add(2, "hours").toDate(),
-    bgcolor: "#fafafa",
-    notes: "alicha hehuche",
-    user: {
-      _id: "12346",
-      name: "licha",
-    },
-  },
-];
+
 export const CalendarScreen = () => {
   const [view, setView] = useState(localStorage.getItem("lastView") || "month");
-  const { openDateModal } = useUIStore();
+  const { showModal } = useUIStore();
+  const { events } = useCalendarStore();
 
   const onDoubleClick = (e) => {
     console.log("esto vale onDoubleClick ", e);
-    openDateModal();
+    showModal(true);
   };
 
   const onSelectEvent = (e) => {
@@ -55,7 +44,7 @@ export const CalendarScreen = () => {
       <div className="calendar__screen__content">
         <Calendar
           localizer={localizer}
-          events={myEventsList}
+          events={events}
           startAccessor="start"
           endAccessor="end"
           messages={messages}

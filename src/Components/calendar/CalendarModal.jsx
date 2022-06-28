@@ -15,9 +15,9 @@ const style = {
 };
 
 export const CalendarModal = () => {
-  const { isDateModalOpen, closeDateModal } = useUIStore();
+  const { isDateModalOpen, showModal } = useUIStore();
   const handleClose = () => {
-    closeDateModal();
+    showModal(false);
   };
 
   return (
