@@ -100,7 +100,7 @@
     "type": "datePickerStart",
     "isText": false,
     "id": "dateStart",
-    "name": "dateStart",
+    "name": "start",
     "label": "Start Date Event",
     "value": "",
     "fieldShouldShow": {
@@ -118,7 +118,7 @@
     "type": "datePickerEnd",
     "isText": false,
     "id": "dateEnd",
-    "name": "dateEnd",
+    "name": "end",
     "label": "End Date Event",
     "value": "",
     "fieldShouldShow": {

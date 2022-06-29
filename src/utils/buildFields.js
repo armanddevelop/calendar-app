@@ -12,7 +12,7 @@ const typesDicctionaryValidations = {
 };
 
 function notEqualDates(value) {
-  const dateStart = moment(this.parent.dateStart).format("LLL");
+  const dateStart = moment(this.parent.start).format("LLL");
   const dateEnd = moment(value).format("LLL");
   return !moment(dateStart).isSame(moment(dateEnd), "minute");
 }
@@ -46,14 +46,14 @@ const buildValidations = (validationsArr, nameField, field) => {
       stringYup = stringYup.email(rule.description);
     }
     if (rule.type === required && field === "date") {
-      if ("dateStart" === nameField) {
+      if ("start" === nameField) {
         dateYupStart = dateYupStart.required();
         validationsFields[nameField] = dateYupStart;
       }
 
-      if ("dateEnd" === nameField) {
+      if ("end" === nameField) {
         dateYupEnd = dateYupEnd
-          .when("dateStart", (startDate, schema) => {
+          .when("start", (startDate, schema) => {
             return (
               startDate &&
               schema.min(

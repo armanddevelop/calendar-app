@@ -12,19 +12,7 @@ const styles = {
 
 export const FabAddNew = () => {
   const { showModal } = useUIStore();
-  const { setActiveEvent } = useCalendarStore();
   const handleClickModal = () => {
-    setActiveEvent({
-      title: "",
-      start: moment().toDate(),
-      end: moment().add(2, "hours").toDate(),
-      bgcolor: "#fafafa",
-      notes: "",
-      user: {
-        _id: "12346",
-        name: "licha",
-      },
-    });
     showModal(true);
   };
   return (

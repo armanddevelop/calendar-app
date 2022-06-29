@@ -3,7 +3,7 @@ import moment from "moment";
 
 const temporalEvent = {
   _id: new Date().getTime(),
-  title: "Cumpleaños alicha",
+  title: "Cumpleaños de pruebas",
   start: moment().toDate(),
   end: moment().add(2, "hours").toDate(),
   bgcolor: "#fafafa",
@@ -24,7 +24,11 @@ export const calendarSlice = createSlice({
     onSetActiveEvent: (state, { payload }) => {
       state.activeEvent = payload;
     },
+    onAddNewEvent: (state, { payload }) => {
+      state.events.push(payload);
+      state.activeEvent = null;
+    },
   },
 });
 
-export const { onSetActiveEvent } = calendarSlice.actions;
+export const { onSetActiveEvent, onAddNewEvent } = calendarSlice.actions;

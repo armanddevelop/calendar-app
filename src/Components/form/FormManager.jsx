@@ -8,10 +8,11 @@ import { TextInputs } from "../Fields/TextInputs";
 import { LinkManager } from "../Link/LinkManager";
 import { DatePickerComponent } from "../Fields/DatePickerComponent";
 import { TextArea } from "../Fields/TextArea";
+import { useCalendarStore } from "../../Hooks";
 
 export const FormManager = ({ pageName, title, handleClose }) => {
   const fieldsPage = buildFields(pageName).initialFields;
-
+  const { startSavingEvent } = useCalendarStore();
   const validationSchema = Yup.object({
     ...buildFields(pageName).validationsFields,
   });
@@ -21,9 +22,12 @@ export const FormManager = ({ pageName, title, handleClose }) => {
       <div className="form__manager__content">
         <Formik
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             console.log("This are the values", values);
-            handleClose();
+            if (pageName === "modal") {
+              await startSavingEvent(values);
+              handleClose();
+            }
           }}
           initialValues={fieldsPage}
         >
