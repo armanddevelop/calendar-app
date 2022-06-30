@@ -1,4 +1,3 @@
-import moment from "moment";
 import { Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useCalendarStore, useUIStore } from "../../Hooks";
@@ -12,7 +11,9 @@ const styles = {
 
 export const FabAddNew = () => {
   const { showModal } = useUIStore();
+  const { clearActiveEvent } = useCalendarStore();
   const handleClickModal = () => {
+    clearActiveEvent();
     showModal(true);
   };
   return (

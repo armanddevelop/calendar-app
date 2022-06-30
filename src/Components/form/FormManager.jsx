@@ -31,7 +31,7 @@ export const FormManager = ({ pageName, title, handleClose }) => {
           }}
           initialValues={fieldsPage}
         >
-          {({ errors }) => (
+          {({ errors, setFieldValue }) => (
             <Form noValidate className="form__manager__fields">
               {dataFields.map(
                 ({
@@ -55,6 +55,8 @@ export const FormManager = ({ pageName, title, handleClose }) => {
                           label={label}
                           validations={validations}
                           errors={errors}
+                          setFieldValue={setFieldValue}
+                          pageName={pageName}
                         />
                       );
                     }
@@ -68,6 +70,8 @@ export const FormManager = ({ pageName, title, handleClose }) => {
                           label={label}
                           validations={validations}
                           errors={errors}
+                          setFieldValue={setFieldValue}
+                          pageName={pageName}
                         />
                       );
                     }
@@ -79,6 +83,7 @@ export const FormManager = ({ pageName, title, handleClose }) => {
                           label={label}
                           value={value}
                           errors={errors}
+                          setFieldValue={setFieldValue}
                         />
                       );
                     }
@@ -89,6 +94,7 @@ export const FormManager = ({ pageName, title, handleClose }) => {
                           name={name}
                           value={value}
                           label={label}
+                          setFieldValue={setFieldValue}
                         />
                       );
                     }

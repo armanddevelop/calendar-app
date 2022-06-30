@@ -1,11 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
-import { onSetActiveEvent, onAddNewEvent } from "../store";
+import { onSetActiveEvent, onAddNewEvent, onClearActiveEvent } from "../store";
 
 export const useCalendarStore = () => {
   const { events, activeEvent } = useSelector((state) => state.calendar);
   const dispatch = useDispatch();
   const setActiveEvent = (event) => {
     dispatch(onSetActiveEvent(event));
+  };
+  const clearActiveEvent = () => {
+    dispatch(onClearActiveEvent());
   };
   const startSavingEvent = async (calendarEvent) => {
     //TODO: make the backend conexion
@@ -32,5 +35,6 @@ export const useCalendarStore = () => {
     activeEvent,
     setActiveEvent,
     startSavingEvent,
+    clearActiveEvent,
   };
 };
