@@ -5,8 +5,8 @@ import { useCalendarStore, useUIStore } from "../../Hooks";
 const styles = {
   margin: "25px",
   position: "absolute",
-  right: "25px",
-  bottom: "-90px",
+  right: "0px",
+  bottom: "-30px",
 };
 
 export const FabAddNew = () => {

@@ -9,6 +9,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { onViewChange } from "../../utils/calendarEvents";
 import { CalendarModal } from "./CalendarModal";
 import { FabAddNew } from "../FloatingActionButton/FabAddNew";
+import { FabbDelete } from "../FloatingActionButton/FabbDelete";
 import { useCalendarStore, useUIStore } from "../../Hooks";
 
 moment.locale("en-us");
@@ -60,6 +61,7 @@ export const CalendarScreen = () => {
         />
         <CalendarModal />
         <FabAddNew />
+        <FabbDelete />
       </div>
     </>
   );

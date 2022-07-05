@@ -4,6 +4,7 @@ import {
   onAddNewEvent,
   onClearActiveEvent,
   onUpdateEvent,
+  onDeleteEvent,
 } from "../store";
 
 export const useCalendarStore = () => {
@@ -44,11 +45,17 @@ export const useCalendarStore = () => {
       );
     }
   };
+  const startDeleteActiveEvent = async () => {
+    //todo: reach the backend
+    dispatch(onDeleteEvent());
+  };
   return {
     events,
     activeEvent,
+    hasEventSeleted: !!activeEvent,
     setActiveEvent,
     startSavingEvent,
     clearActiveEvent,
+    startDeleteActiveEvent,
   };
 };
