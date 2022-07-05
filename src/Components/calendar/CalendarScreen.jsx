@@ -20,7 +20,6 @@ export const CalendarScreen = () => {
   const { events, setActiveEvent } = useCalendarStore();
 
   const onDoubleClick = (e) => {
-    console.log("esto vale onDoubleClick ", e);
     showModal(true);
   };
 

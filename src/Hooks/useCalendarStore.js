@@ -1,5 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { onSetActiveEvent, onAddNewEvent, onClearActiveEvent } from "../store";
+import {
+  onSetActiveEvent,
+  onAddNewEvent,
+  onClearActiveEvent,
+  onUpdateEvent,
+} from "../store";
 
 export const useCalendarStore = () => {
   const { events, activeEvent } = useSelector((state) => state.calendar);
@@ -13,8 +18,17 @@ export const useCalendarStore = () => {
   const startSavingEvent = async (calendarEvent) => {
     //TODO: make the backend conexion
     //happy path
-    if (calendarEvent._id) {
+    if (activeEvent?._id) {
       //updateEvent
+      const { _id, bgcolor, user } = activeEvent;
+      dispatch(
+        onUpdateEvent({
+          ...calendarEvent,
+          _id,
+          bgcolor,
+          user,
+        })
+      );
     } else {
       //creating
       dispatch(
