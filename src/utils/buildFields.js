@@ -1,8 +1,7 @@
 import * as Yup from "yup";
 import moment from "moment";
 import dataFields from "../data/data-fields.json";
-const initialFields = {};
-const validationsFields = {};
+let validationsFields = {};
 const typesDicctionaryValidations = {
   required: "required",
   minLength: "minLength",
@@ -70,6 +69,10 @@ const buildValidations = (validationsArr, nameField, field) => {
   if (field !== "date") validationsFields[nameField] = stringYup;
 };
 export const buildFields = (pageName) => {
+  const initialFields = {};
+  if (Object.keys(validationsFields).length !== 0) {
+    validationsFields = {};
+  }
   for (const data of dataFields) {
     const { name, value, fieldShouldShow, validations, field } = data;
 
