@@ -8,11 +8,12 @@ import { TextInputs } from "../Fields/TextInputs";
 import { LinkManager } from "../Link/LinkManager";
 import { DatePickerComponent } from "../Fields/DatePickerComponent";
 import { TextArea } from "../Fields/TextArea";
-import { useCalendarStore } from "../../Hooks";
+import { useAuthStore, useCalendarStore } from "../../Hooks";
 
 export const FormManager = ({ pageName, title, handleClose }) => {
   const fieldsPage = buildFields(pageName).initialFields;
   const { startSavingEvent } = useCalendarStore();
+  const { startLogin } = useAuthStore();
   const validationSchema = Yup.object({
     ...buildFields(pageName).validationsFields,
   });
@@ -27,6 +28,8 @@ export const FormManager = ({ pageName, title, handleClose }) => {
             if (pageName === "modal") {
               await startSavingEvent(values);
               handleClose();
+            } else if (pageName === "logIn") {
+              startLogin(values);
             }
           }}
           initialValues={fieldsPage}

@@ -17,7 +17,7 @@ export const AppRouter = () => {
           <Route
             path="/authorice"
             children={
-              <PublicRoutes isLoged={true}>
+              <PublicRoutes isLoged={false}>
                 <AuthRouter />
               </PublicRoutes>
             }
@@ -25,7 +25,7 @@ export const AppRouter = () => {
           <Route
             path="/"
             children={
-              <PrivateRoutes isLoged={true}>
+              <PrivateRoutes isLoged={false}>
                 <CalendarScreen />
               </PrivateRoutes>
             }
