@@ -19,7 +19,7 @@ export const useAuthStore = () => {
           name: data.resp.name,
           uid: data.resp.uid,
         };
-        dispatch(onLogIn({ payload }));
+        dispatch(onLogIn(payload));
       }
     } catch (error) {
       console.error("something go wrong ", error.message);
@@ -48,7 +48,7 @@ export const useAuthStore = () => {
           name: data.resp.name,
           uid: data.resp.uid,
         };
-        dispatch(onLogIn({ payload }));
+        dispatch(onLogIn(payload));
       }
     } catch (error) {
       const { response } = error;
@@ -70,5 +70,17 @@ export const useAuthStore = () => {
     }
   };
 
-  return { startLogin, startRegisterUser, checkToken, status };
+  const startLogOut = () => {
+    localStorage.clear();
+    dispatch(onLogOut());
+  };
+
+  return {
+    startLogin,
+    startRegisterUser,
+    checkToken,
+    startLogOut,
+    status,
+    user,
+  };
 };
