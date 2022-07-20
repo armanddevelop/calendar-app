@@ -4,11 +4,11 @@ import { AlertMessage } from "../alert/AlertMessage";
 import { FormManager } from "../form/FormManager";
 
 export const LogInScreen = () => {
-  const { status, errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage } = useSelector((state) => state.auth);
   return (
     <>
       <Container fixed maxWidth="md">
-        {status === "not-authenticated" && (
+        {errorMessage && (
           <AlertMessage severity="error" message={errorMessage} />
         )}
         <Box>

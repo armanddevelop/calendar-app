@@ -21,12 +21,54 @@ export const useAuthStore = () => {
         };
         dispatch(onLogIn({ payload }));
       }
-      console.log("esto vale el response ", data);
     } catch (error) {
       console.error("something go wrong ", error.message);
       const { data } = error.response;
       dispatch(onLogOut(data.resp));
     }
   };
-  return { startLogin };
+
+  const startRegisterUser = async ({
+    name,
+    email,
+    password,
+    confirmPassword,
+  }) => {
+    try {
+      dispatch(onChecking());
+      const { data } = await calendarApi.post("/v1/authUser/register/user", {
+        name,
+        email,
+        password,
+        confirmPassword,
+      });
+      if (data.resp?.token) {
+        localStorage.setItem("token", data.resp.token);
+        const payload = {
+          name: data.resp.name,
+          uid: data.resp.uid,
+        };
+        dispatch(onLogIn({ payload }));
+      }
+    } catch (error) {
+      const { response } = error;
+      console.error("something go wrong ", response.data.resp);
+      dispatch(onLogOut(response.data.resp));
+    }
+  };
+
+  const checkToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return dispatch(onLogOut());
+    try {
+      const { resp } = await calendarApi.get("/v1/authUser/renew/token");
+      localStorage("token", resp.token);
+    } catch (error) {
+      console.error("something go wrong ", error);
+      localStorage.clear();
+      dispatch(onLogOut());
+    }
+  };
+
+  return { startLogin, startRegisterUser, checkToken, status };
 };

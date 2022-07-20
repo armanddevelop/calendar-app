@@ -13,7 +13,7 @@ import { useAuthStore, useCalendarStore } from "../../Hooks";
 export const FormManager = ({ pageName, title, handleClose }) => {
   const fieldsPage = buildFields(pageName).initialFields;
   const { startSavingEvent } = useCalendarStore();
-  const { startLogin } = useAuthStore();
+  const { startLogin, startRegisterUser } = useAuthStore();
   const validationSchema = Yup.object({
     ...buildFields(pageName).validationsFields,
   });
@@ -24,12 +24,13 @@ export const FormManager = ({ pageName, title, handleClose }) => {
         <Formik
           validationSchema={validationSchema}
           onSubmit={async (values) => {
-            console.log("This are the values", values);
             if (pageName === "modal") {
               await startSavingEvent(values);
               handleClose();
             } else if (pageName === "logIn") {
               startLogin(values);
+            } else if (pageName === "register") {
+              await startRegisterUser(values);
             }
           }}
           initialValues={fieldsPage}

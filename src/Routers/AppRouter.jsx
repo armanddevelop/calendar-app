@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -5,11 +7,18 @@ import {
   Redirect,
 } from "react-router-dom";
 import { CalendarScreen } from "../Components";
+import { useAuthStore } from "../Hooks";
 import { AuthRouter } from "./AuthRouter";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { PublicRoutes } from "./PublicRoutes";
 
 export const AppRouter = () => {
+  const { status, checkToken } = useAuthStore();
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
   return (
     <Router>
       <div>
@@ -17,7 +26,7 @@ export const AppRouter = () => {
           <Route
             path="/authorice"
             children={
-              <PublicRoutes isLoged={false}>
+              <PublicRoutes isLoged={status}>
                 <AuthRouter />
               </PublicRoutes>
             }
@@ -25,7 +34,7 @@ export const AppRouter = () => {
           <Route
             path="/"
             children={
-              <PrivateRoutes isLoged={false}>
+              <PrivateRoutes isLoged={status}>
                 <CalendarScreen />
               </PrivateRoutes>
             }
