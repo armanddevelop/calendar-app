@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { calendarApi } from "../api";
 import {
   onSetActiveEvent,
   onAddNewEvent,
@@ -9,40 +10,48 @@ import {
 
 export const useCalendarStore = () => {
   const { events, activeEvent } = useSelector((state) => state.calendar);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const setActiveEvent = (event) => {
     dispatch(onSetActiveEvent(event));
   };
+
   const clearActiveEvent = () => {
     dispatch(onClearActiveEvent());
   };
+
   const startSavingEvent = async (calendarEvent) => {
     //TODO: make the backend conexion
     //happy path
-    if (activeEvent?._id) {
+    if (activeEvent?.id) {
       //updateEvent
-      const { _id, bgcolor, user } = activeEvent;
+      const { id, user } = activeEvent;
       dispatch(
         onUpdateEvent({
           ...calendarEvent,
-          _id,
-          bgcolor,
+          id,
           user,
         })
       );
     } else {
-      //creating
-      dispatch(
-        onAddNewEvent({
-          ...calendarEvent,
-          _id: new Date().getTime(),
-          bgcolor: "#fafafa",
-          user: {
-            _id: "12346",
-            name: "Nalleli",
-          },
-        })
-      );
+      //creating event
+      try {
+        const { data } = await calendarApi.post(
+          "/v1/events/create-new-event",
+          calendarEvent
+        );
+        const id = data && data.resp && data.resp.id;
+        dispatch(
+          onAddNewEvent({
+            ...calendarEvent,
+            id,
+            user,
+          })
+        );
+      } catch (error) {
+        console.error("Somthing happend ", error);
+      }
     }
   };
   const startDeleteActiveEvent = async () => {

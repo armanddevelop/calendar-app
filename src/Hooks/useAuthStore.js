@@ -4,7 +4,7 @@ import { onChecking, onLogIn, onLogOut } from "../store";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
-  const { status, user, errorMessage } = useSelector((state) => state.auth);
+  const { status, user } = useSelector((state) => state.auth);
 
   const startLogin = async ({ email, password }) => {
     try {
