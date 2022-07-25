@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import moment from "moment";
-
-const temporalEvent = {
-  _id: new Date().getTime(),
-  title: "Cumpleaños de pruebas",
-  start: moment().toDate(),
-  end: moment().add(2, "hours").toDate(),
-  bgcolor: "#fafafa",
-  notes: "alicha hehuche",
-  user: {
-    _id: "12346",
-    name: "licha",
-  },
-};
 
 export const calendarSlice = createSlice({
   name: "calendar",
   initialState: {
-    events: [temporalEvent],
+    isLoadingEvents: true,
+    events: [],
     activeEvent: null,
   },
   reducers: {
+    onGetEvents: (state, { payload = [] }) => {
+      state.isLoadingEvents = false;
+      console.log("esto vale payload ", payload);
+      //state.events=payload;
+      payload.forEach((event) => {
+        const existEvent = state.events.some(
+          (dbEvent) => dbEvent.id === event.id
+        );
+        if (!existEvent) {
+          state.events.push(event);
+        }
+      });
+    },
     onSetActiveEvent: (state, { payload }) => {
       state.activeEvent = payload;
     },
@@ -32,9 +32,9 @@ export const calendarSlice = createSlice({
       state.activeEvent = null;
     },
     onUpdateEvent: (state, { payload }) => {
-      const { _id } = payload;
+      const { id } = payload;
       state.events = state.events.map((event) => {
-        if (event._id === _id) {
+        if (event.id === id) {
           event = payload;
         }
         return event;
@@ -52,6 +52,7 @@ export const calendarSlice = createSlice({
 });
 
 export const {
+  onGetEvents,
   onSetActiveEvent,
   onAddNewEvent,
   onClearActiveEvent,

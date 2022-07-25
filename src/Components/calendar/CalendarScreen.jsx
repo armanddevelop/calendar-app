@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { messages } from "../../utils/calendarTrasnlationsES";
@@ -18,7 +18,7 @@ const localizer = momentLocalizer(moment);
 export const CalendarScreen = () => {
   const [view, setView] = useState(localStorage.getItem("lastView") || "month");
   const { showModal } = useUIStore();
-  const { events, setActiveEvent } = useCalendarStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
 
   const onDoubleClick = (e) => {
     showModal(true);
@@ -40,6 +40,11 @@ export const CalendarScreen = () => {
     };
     return { style };
   };
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, [startLoadingEvents]);
+
   return (
     <>
       <NavBar />
