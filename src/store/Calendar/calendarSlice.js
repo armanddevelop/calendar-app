@@ -10,7 +10,6 @@ export const calendarSlice = createSlice({
   reducers: {
     onGetEvents: (state, { payload = [] }) => {
       state.isLoadingEvents = false;
-      console.log("esto vale payload ", payload);
       //state.events=payload;
       payload.forEach((event) => {
         const existEvent = state.events.some(
@@ -54,9 +53,10 @@ export const calendarSlice = createSlice({
       }
     },
 
-    onLogOutUser: (state) => {
+    onLogOutCalendar: (state) => {
       state.isLoadingEvents = true;
       state.events = [];
+      state.activeEvent = null;
     },
   },
 });
@@ -65,7 +65,7 @@ export const {
   onGetEvents,
   onSetActiveEvent,
   onAddNewEvent,
-  onLogOutUser,
+  onLogOutCalendar,
   onClearActiveEvent,
   onUpdateEvent,
   onDeleteEvent,

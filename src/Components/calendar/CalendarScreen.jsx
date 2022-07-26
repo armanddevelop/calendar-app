@@ -25,7 +25,6 @@ export const CalendarScreen = () => {
   };
 
   const onSelectEvent = (evt) => {
-    console.log("esto vale e en onSelectEvent", evt);
     setActiveEvent(evt);
   };
 
@@ -42,7 +41,7 @@ export const CalendarScreen = () => {
 
   useEffect(() => {
     startLoadingEvents();
-  }, [startLoadingEvents]);
+  }, []);
 
   return (
     <>

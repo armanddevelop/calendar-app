@@ -7,7 +7,6 @@ import {
   onClearActiveEvent,
   onUpdateEvent,
   onDeleteEvent,
-  onLogOutUser,
 } from "../store";
 import { convertDateEvents } from "../utils/covertDateEvents";
 
@@ -55,7 +54,6 @@ export const useCalendarStore = () => {
   };
 
   const startDeleteActiveEvent = async () => {
-    //todo: reach the backend
     try {
       const { id } = activeEvent;
       const { data } = await calendarApi.delete(
@@ -77,9 +75,6 @@ export const useCalendarStore = () => {
       console.error("Fail to startLodingEvents ", error);
     }
   };
-  const startLogOutUser = () => {
-    dispatch(onLogOutUser());
-  };
 
   return {
     events,
@@ -87,7 +82,6 @@ export const useCalendarStore = () => {
     hasEventSeleted: !!activeEvent,
     setActiveEvent,
     startLoadingEvents,
-    startLogOutUser,
     startSavingEvent,
     clearActiveEvent,
     startDeleteActiveEvent,

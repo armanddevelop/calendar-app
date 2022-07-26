@@ -24,7 +24,6 @@ export const FormManager = ({ pageName, title, handleClose }) => {
         <Formik
           validationSchema={validationSchema}
           onSubmit={async (values) => {
-            console.log("esto vale values ", values);
             if (pageName === "modal") {
               await startSavingEvent(values);
               handleClose();

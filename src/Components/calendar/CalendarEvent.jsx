@@ -1,5 +1,4 @@
 export const CalendarEvent = ({ event }) => {
-  //console.log("this is the value of event ", event);
   const { title, notes, user } = event;
   return (
     <>
