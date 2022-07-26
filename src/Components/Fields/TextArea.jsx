@@ -12,7 +12,7 @@ export const TextArea = (props) => {
     if (activeEvent) {
       setFieldValue("notes", activeEvent.notes);
     }
-  }, [activeEvent, setFieldValue]);
+  }, [activeEvent]);
   return (
     <div>
       <TextareaAutosize

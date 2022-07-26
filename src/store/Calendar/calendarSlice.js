@@ -21,16 +21,20 @@ export const calendarSlice = createSlice({
         }
       });
     },
+
     onSetActiveEvent: (state, { payload }) => {
       state.activeEvent = payload;
     },
+
     onAddNewEvent: (state, { payload }) => {
       state.events.push(payload);
       state.activeEvent = null;
     },
+
     onClearActiveEvent: (state) => {
       state.activeEvent = null;
     },
+
     onUpdateEvent: (state, { payload }) => {
       const { id } = payload;
       state.events = state.events.map((event) => {
@@ -40,6 +44,7 @@ export const calendarSlice = createSlice({
         return event;
       });
     },
+
     onDeleteEvent: (state) => {
       if (state.activeEvent) {
         state.events = state.events.filter(
@@ -48,6 +53,11 @@ export const calendarSlice = createSlice({
         state.activeEvent = null;
       }
     },
+
+    onLogOutUser: (state) => {
+      state.isLoadingEvents = true;
+      state.events = [];
+    },
   },
 });
 
@@ -55,6 +65,7 @@ export const {
   onGetEvents,
   onSetActiveEvent,
   onAddNewEvent,
+  onLogOutUser,
   onClearActiveEvent,
   onUpdateEvent,
   onDeleteEvent,

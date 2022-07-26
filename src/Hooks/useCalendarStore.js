@@ -7,6 +7,7 @@ import {
   onClearActiveEvent,
   onUpdateEvent,
   onDeleteEvent,
+  onLogOutUser,
 } from "../store";
 import { convertDateEvents } from "../utils/covertDateEvents";
 
@@ -24,36 +25,35 @@ export const useCalendarStore = () => {
   };
 
   const startSavingEvent = async (calendarEvent) => {
-    //TODO: make the backend conexion
-    //happy path
-    if (activeEvent?.id) {
-      //updateEvent
-      const { id } = activeEvent;
-      const { data } = await calendarApi.put(
-        `/v1/events/update-event/${id}`,
-        calendarEvent
-      );
-      if (data) dispatch(onUpdateEvent({ ...calendarEvent, id, user }));
-    } else {
-      //creating event
-      try {
-        const { data } = await calendarApi.post(
-          "/v1/events/create-new-event",
+    try {
+      //update-event
+      if (activeEvent?.id) {
+        const { id } = activeEvent;
+        const { data } = await calendarApi.put(
+          `/v1/events/update-event/${id}`,
           calendarEvent
         );
-        const id = data && data.resp && data.resp.id;
-        dispatch(
-          onAddNewEvent({
-            ...calendarEvent,
-            id,
-            user,
-          })
-        );
-      } catch (error) {
-        console.error("Error in  startSavingEvent", error);
+        if (data) dispatch(onUpdateEvent({ ...calendarEvent, id, user }));
+        return;
       }
+      //create-event
+      const { data } = await calendarApi.post(
+        "/v1/events/create-new-event",
+        calendarEvent
+      );
+      const id = data && data.resp && data.resp.id;
+      dispatch(
+        onAddNewEvent({
+          ...calendarEvent,
+          id,
+          user,
+        })
+      );
+    } catch (error) {
+      console.error("Error in  startSavingEvent ", error);
     }
   };
+
   const startDeleteActiveEvent = async () => {
     //todo: reach the backend
     dispatch(onDeleteEvent());
@@ -62,10 +62,15 @@ export const useCalendarStore = () => {
   const startLoadingEvents = async () => {
     try {
       const { data } = await calendarApi.get("/v1/events");
-      dispatch(onGetEvents(data.resp));
+      const events = convertDateEvents(data.resp);
+      //dispatch(onGetEvents(data.resp));
+      dispatch(onGetEvents(events));
     } catch (error) {
       console.error("Fail to startLodingEvents ", error);
     }
+  };
+  const startLogOutUser = () => {
+    dispatch(onLogOutUser());
   };
 
   return {
@@ -74,6 +79,7 @@ export const useCalendarStore = () => {
     hasEventSeleted: !!activeEvent,
     setActiveEvent,
     startLoadingEvents,
+    startLogOutUser,
     startSavingEvent,
     clearActiveEvent,
     startDeleteActiveEvent,

@@ -22,7 +22,7 @@ export const useAuthStore = () => {
         dispatch(onLogIn(payload));
       }
     } catch (error) {
-      console.error("something go wrong ", error.message);
+      console.error("Error in startLogin ", error.message);
       const { data } = error.response;
       dispatch(onLogOut(data.resp));
     }
@@ -52,7 +52,7 @@ export const useAuthStore = () => {
       }
     } catch (error) {
       const { response } = error;
-      console.error("something go wrong ", response.data.resp);
+      console.error("Error in startRegisterUser ", response.data.resp);
       dispatch(onLogOut(response.data.resp));
     }
   };
@@ -64,7 +64,7 @@ export const useAuthStore = () => {
       const { resp } = await calendarApi.get("/v1/authUser/renew/token");
       localStorage("token", resp.token);
     } catch (error) {
-      console.error("something go wrong ", error);
+      console.error("Error in checkToken ", error);
       localStorage.clear();
       dispatch(onLogOut());
     }

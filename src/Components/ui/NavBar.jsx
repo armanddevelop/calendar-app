@@ -1,9 +1,14 @@
 import { Button, Toolbar, AppBar, Box, Typography } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAuthStore } from "../../Hooks";
+import { useAuthStore, useCalendarStore } from "../../Hooks";
 export const NavBar = () => {
   const { startLogOut, user } = useAuthStore();
-
+  const { clearActiveEvent, startLogOutUser } = useCalendarStore();
+  const logOut = () => {
+    startLogOut();
+    clearActiveEvent();
+    startLogOutUser();
+  };
   return (
     <Box sx={{ mb: 2 }}>
       <AppBar position="static">
@@ -12,7 +17,7 @@ export const NavBar = () => {
             {user.name.toUpperCase()}
           </Typography>
           <Button
-            onClick={() => startLogOut()}
+            onClick={logOut}
             color="inherit"
             size="medium"
             startIcon={<LogoutIcon />}

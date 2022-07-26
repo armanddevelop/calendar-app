@@ -14,7 +14,7 @@ export const TextInputs = (props) => {
     if (activeEvent && pageName === "modal") {
       setFieldValue("title", activeEvent.title);
     }
-  }, [activeEvent, setFieldValue, pageName]);
+  }, [activeEvent]);
 
   if (!(Object.keys(errors).length === 0 && errors.constructor === Object)) {
     isError = Boolean(errors[name]);
