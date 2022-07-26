@@ -29,8 +29,7 @@ export const CalendarScreen = () => {
     setActiveEvent(evt);
   };
 
-  const eventStyleGetter = (...args) => {
-    const { start, end, title } = args[0];
+  const eventStyleGetter = () => {
     const style = {
       backgroundColor: "#367CF7",
       boderRadius: "0px",

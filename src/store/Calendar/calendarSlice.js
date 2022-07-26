@@ -48,7 +48,7 @@ export const calendarSlice = createSlice({
     onDeleteEvent: (state) => {
       if (state.activeEvent) {
         state.events = state.events.filter(
-          ({ _id }) => _id !== state.activeEvent._id
+          ({ id }) => id !== state.activeEvent.id
         );
         state.activeEvent = null;
       }

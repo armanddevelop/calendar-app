@@ -16,7 +16,7 @@ export const FabbDelete = () => {
       color="error"
       aria-label="delete"
       style={styles}
-      onClick={() => startDeleteActiveEvent()}
+      onClick={async () => await startDeleteActiveEvent()}
     >
       <DeleteIcon />
     </Fab>
